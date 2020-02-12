@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/scheduled_tab"
+        android:icon="@drawable/ic_tab_scheduled"
+        android:title="@string/tab_scheduled" />
+
+    <item
+        android:id="@+id/following_tab"
+        android:icon="@drawable/ic_tab_following"
+        android:title="@string/tab_following" />
+
+    <item
+        android:id="@+id/news_tab"
+        android:icon="@drawable/ic_tab_news"
+        android:title="@string/tab_news" />
+</menu>
