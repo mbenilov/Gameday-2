@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Gameday2</string>
+    <string name="app_name">Gameday</string>
     <string name="tab_scheduled">Scheduled</string>
     <string name="tab_following">Following</string>
     <string name="tab_news">News</string>
