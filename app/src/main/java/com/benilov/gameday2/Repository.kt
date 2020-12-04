@@ -17,21 +17,18 @@ class Repository constructor() {
         .baseUrl(BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
+
     private val webService = retrofit.create(WebService::class.java)
 
     fun getTeams(): LiveData<Teams> {
         val data = MutableLiveData<Teams>()
         webService.getTeams().enqueue(object : Callback<Teams> {
             override fun onResponse(call: Call<Teams>, response: Response<Teams>) {
-                response.body()?.teams?.forEach {
-                    Log.i(TAG, it.name)
-                }
+                response.body()?.let {teams -> data.value = teams }
             }
-
             override fun onFailure(call: Call<Teams>, t: Throwable) {
                 Log.e(TAG, "Unable to retrieve teams: " + t.message)
             }
-
         })
         return data
     }
