@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun getNavigationItemSelectedListener(): BottomNavigationView.OnNavigationItemSelectedListener {
         return BottomNavigationView.OnNavigationItemSelectedListener {
-            when(it.itemId) {
+            when (it.itemId) {
                 R.id.scheduled_tab -> {
                     navigate(ScheduledGamesFragment.newInstance())
                     true
@@ -30,10 +30,10 @@ class MainActivity : AppCompatActivity() {
                     navigate(MyTeamsFragment.newInstance())
                     true
                 }
-                R.id.news_tab -> {
-                    navigate(NewsFragment.newInstance())
-                    true
-                }
+//                R.id.news_tab -> {
+//                    navigate(NewsFragment.newInstance())
+//                    true
+//                }
                 else -> false
             }
         }
