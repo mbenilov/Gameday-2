@@ -1,9 +1,7 @@
 package com.benilov.gameday2
 
 import android.util.Log
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.benilov.gameday2.models.Team
 import com.benilov.gameday2.models.Teams
 import retrofit2.Call
 import retrofit2.Callback
@@ -20,11 +18,14 @@ class Repository constructor() {
 
     private val webService = retrofit.create(WebService::class.java)
 
-    fun getTeams(): LiveData<Teams> {
-        val data = MutableLiveData<Teams>()
+    fun getTeams(): MutableLiveData<Teams> {
+        var data: MutableLiveData<Teams> = MutableLiveData()
         webService.getTeams().enqueue(object : Callback<Teams> {
             override fun onResponse(call: Call<Teams>, response: Response<Teams>) {
-                response.body()?.let {teams -> data.value = teams }
+                if (response.isSuccessful) {
+                    Log.i(TAG, "Successfully retrieved teams...")
+                    data.value = response.body()
+                }
             }
             override fun onFailure(call: Call<Teams>, t: Throwable) {
                 Log.e(TAG, "Unable to retrieve teams: " + t.message)
@@ -33,7 +34,7 @@ class Repository constructor() {
         return data
     }
 
-    companion object {
+    private companion object {
         private const val BASE_URL = "https://www.thesportsdb.com/"
         private const val TAG = "Repository"
     }
