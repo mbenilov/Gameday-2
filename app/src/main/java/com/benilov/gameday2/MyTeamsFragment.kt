@@ -15,9 +15,11 @@ import com.benilov.gameday2.models.TeamsViewModel
 class MyTeamsFragment : Fragment() {
     private var teams: List<Team> = ArrayList()
     private var myTeamsRecycler: RecyclerView? = null
+    private var loadingIcon: LoadingIconView? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val v = inflater.inflate(R.layout.fragment_my_teams, container, false)
+        loadingIcon = v.findViewById(R.id.loading_icon)
 
         myTeamsRecycler = v.findViewById(R.id.my_teams_recycler_view)
         myTeamsRecycler?.adapter = MyTeamsAdapter(teams)
@@ -27,9 +29,16 @@ class MyTeamsFragment : Fragment() {
         teamsViewModel.getTeams()?.observe(viewLifecycleOwner, Observer {
             (myTeamsRecycler?.adapter as MyTeamsAdapter).teams = it.teams
             myTeamsRecycler?.adapter?.notifyDataSetChanged()
+            loadingIcon?.stop()
         })
 
         return v
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        loadingIcon?.start()
     }
 
     companion object {

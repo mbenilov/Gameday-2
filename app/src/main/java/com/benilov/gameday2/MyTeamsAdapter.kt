@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.benilov.gameday2.models.Team
 import com.google.android.material.imageview.ShapeableImageView
+import com.squareup.picasso.Picasso
 
 class MyTeamsAdapter(
     internal var teams: List<Team>
@@ -25,6 +26,9 @@ class MyTeamsAdapter(
 
     override fun onBindViewHolder(holder: MyTeamViewHolder, position: Int) {
         holder.name.text = teams[position].name
+        Picasso.get()
+            .load(teams[position].badgeUrl)
+            .into(holder.icon)
     }
 
     override fun getItemCount() = teams.size

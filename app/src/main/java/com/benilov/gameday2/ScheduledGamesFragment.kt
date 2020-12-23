@@ -10,11 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 class ScheduledGamesFragment : Fragment() {
 
-//    private val viewModel: TeamsViewModel by viewModels()
-
     private lateinit var recyclerView: RecyclerView
-
-    //    private lateinit var viewAdapter: TeamsAdapter
     private lateinit var viewManager: RecyclerView.LayoutManager
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -25,14 +21,6 @@ class ScheduledGamesFragment : Fragment() {
         recyclerView.layoutManager = viewManager
 
         return v
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-//        viewModel.teams.observe(viewLifecycleOwner) {
-//            viewAdapter = TeamsAdapter(it)
-//        }
     }
 
     companion object {
