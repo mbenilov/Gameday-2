@@ -14,7 +14,7 @@
         android:layout_margin="8dp">
 
         <ImageView
-            android:id="@+id/teamIcon"
+            android:id="@+id/team_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -23,7 +23,7 @@
             tools:srcCompat="@tools:sample/avatars[14]" />
 
         <TextView
-            android:id="@+id/teamName"
+            android:id="@+id/team_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TextView"
@@ -32,7 +32,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/teamIcon"
+            app:layout_constraintStart_toEndOf="@+id/team_icon"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.5"
             tools:text="MIA @ BOS" />
@@ -46,8 +46,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/teamIcon"
-            app:layout_constraintTop_toBottomOf="@+id/teamName"
+            app:layout_constraintStart_toEndOf="@+id/team_icon"
+            app:layout_constraintTop_toBottomOf="@+id/team_name"
             app:layout_constraintVertical_bias="0"
             tools:text="7:30PM EST" />
 
