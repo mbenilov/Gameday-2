@@ -14,15 +14,18 @@ import com.google.android.material.imageview.ShapeableImageView
 import com.squareup.picasso.Picasso
 
 class MyTeamsAdapter(
-    var teams: List<Team>
+    var teams: List<Team>,
+    var savedTeams: List<Team>,
+    private val listener: NotificationsPrefsListener
 ) : RecyclerView.Adapter<MyTeamsAdapter.MyTeamViewHolder>() {
 
     class MyTeamViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val teamIcon: ShapeableImageView = view.findViewById(R.id.team_icon)
-        val notificationIcon: ImageButton = view.findViewById(R.id.notification_icon)
-        var shouldNotify: Boolean = false
         val name: TextView = view.findViewById(R.id.team_name)
+        val notificationIcon: ImageButton = view.findViewById(R.id.notification_icon)
+
         internal val shakeAnimation: Animation = AnimationUtils.loadAnimation(view.context, R.anim.shake)
+        var shouldNotify: Boolean = false
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyTeamViewHolder {
@@ -32,17 +35,30 @@ class MyTeamsAdapter(
     }
 
     override fun onBindViewHolder(holder: MyTeamViewHolder, position: Int) {
-        holder.name.text = teams[position].name
+        val team = teams[position]
+        holder.shouldNotify = savedTeams.contains(team)
+
         Picasso.get()
-            .load(teams[position].iconUrl)
+            .load(team.iconUrl)
             .into(holder.teamIcon)
+
+        holder.name.text = team.name
+        holder.notificationIcon.let {
+            if (holder.shouldNotify) {
+                it.background = getDrawable(it.context, R.drawable.ic_baseline_notifications_on_24)
+            } else {
+                it.background = getDrawable(it.context, R.drawable.ic_baseline_notifications_off_24)
+            }
+        }
         holder.notificationIcon.setOnClickListener {
             if (holder.shouldNotify) {
+                listener.removeTeam(team)
                 holder.shouldNotify = false
                 it.background = getDrawable(it.context, R.drawable.ic_baseline_notifications_off_24)
             } else {
+                listener.addTeam(team)
                 holder.shouldNotify = true
-                it.background = getDrawable(it.context, R.drawable.ic_baseline_notifications_active_24)
+                it.background = getDrawable(it.context, R.drawable.ic_baseline_notifications_on_24)
                 it.startAnimation(holder.shakeAnimation)
             }
         }
